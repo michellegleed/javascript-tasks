@@ -1,11 +1,18 @@
 const scoreNode = document.querySelector('#score');
 const wrapper = document.querySelector('#wrapper');
+const stopButton = document.querySelector('#stop-button');
 
 let gridHeight = window.innerHeight - 200.0;
 let gridWidth = window.innerWidth - 48.0;
 
 // console.log("screen width: ", gridWidth);
 // console.log("screen height: ", gridHeight);
+
+
+// STILL TO DO..
+// - make start button work 
+// - make speed buttons work 
+// - make commet fly in on click (but only explode if on a dino)
 
 
 let dinoGridRows = Math.floor(gridHeight / 75.0)
@@ -18,6 +25,7 @@ let dinoImgs = [];
 let dinoIndexes = [];
 let lastIndex;
 let score = 0;
+let time = 2000;
 
 showDino = () => {
     if (lastIndex != null) {
@@ -30,7 +38,8 @@ showDino = () => {
 
 whack = (index) => {
     if (index == lastIndex) {
-        i = dinoIndexes.indexOf(index.toString());
+        console.log(typeof(index));
+        i = dinoIndexes.indexOf(lastIndex);
         dinoIndexes.splice(i, 1);
         console.log("dino hit at index ", index);
         console.log("i is ", i);
@@ -75,10 +84,11 @@ for (let i=0; i<dinoImgs.length; i++) {
     dinoIndexes.push(i);
 }
 
-interval = setInterval(showDino, 2000);
+interval = setInterval(showDino, time);
 
 stop = () => {
-    window.clearInterval(interval)
+    window.clearInterval(interval);
+    stopButton.innerHTML = "Start";
 }
 
 
