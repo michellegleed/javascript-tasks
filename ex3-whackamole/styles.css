@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Frijole&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url('img/bg.jpg');
+    background-size: cover;
+    background-position: center; 
+    font-family: 'Frijole', cursive;
+}
+
+header {
+    margin: 0 24px;
+    height: 100px;
+    color: #58250c;
+}
+
+div#controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+div#controls button {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 4px 12px;
+    font-family: 'Frijole', cursive;
+    border: soldi 1px #58250c;
+    border-radius: 5px;
+}
+
+footer {
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    right: 24px;
+}
+
+h1 {
+    font-size: 56px;
+ 
+    text-align: center;
+}
+
+#wrapper {
+    margin: 24px;
+}
+
+img.dino-img {
+    opacity: 0;
+}
+
+img.active {
+    opacity: 100;
+}
+
+img.exploded {
+    animation-name: "fadeExplosion";
+    animation-duration: 2s;
+}
+
+@keyframes fadeExplosion {
+    20% {opacity: 100; transform: scale(1.2)}
+    50% {opacity: 75; transform: scale(1.5)}
+    100% {opacity: 0;}
+}
+
+
