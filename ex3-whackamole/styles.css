@@ -14,7 +14,6 @@ body {
 
 header {
     margin: 0 24px;
-    height: 100px;
     color: #58250c;
 }
 
@@ -23,7 +22,7 @@ div#controls {
     justify-content: space-around;
 }
 
-button#stop-button {
+button#button {
     background-color: rgba(255, 255, 255, 0.5);
     color: #58250c;
     padding: 4px 12px;
@@ -69,4 +68,26 @@ img.exploded {
     100% {opacity: 0;}
 }
 
+img.moving {
+    transition: position 2s;   
+}
 
+#game-over {
+    display: flex;
+    padding: 20vh;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    display: none;
+}
+
+div#next-level {
+    z-index: -100;
+    animation: fadeOut 2s ease forwards;
+}
+
+@keyframes fadeOut {
+    0% {opacity: 100; transform: scale(1.2)}
+    100% {opacity: 0; transform: scale(2)}
+}

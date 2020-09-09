@@ -12,93 +12,33 @@
         <header>
             <h1>Whack A Dinosaur</h1>
             <div id="controls">
-                <p id="score">Kills: 0</p>
-                <p id="speed">
+                <p id="score">Kills:</p>
+                <!-- <p id="speed">
                     <span id="slow" class="selected">slow</span>
                     -
                     <span id="medium">medium</span>
                     -
                     <span id="fast">fast</span>
-                </p>
-                <button id="stop-button" onclick="stop()">Stop</button>
+                </p> -->
+                <p id="asteroids-left">Asteroids Left:</p>
+                <button id="button" value="start" onclick="toggleButton()">Start</button>
             </div>
             
         </header>
 
         <div id="wrapper">
-           <!-- <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>
-            <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div>    
-           <div class="icon-div">
-               <img src="img/dino.jpg">
-           </div> -->
+            <div id="game-over">
+                <h1>Game Over</h1>
+                <p id="final-score">Kills: </p>
+                <p id="final-percent">%</p>
+            </div>
+            <!-- <div id="next-level">
+                <h1 id="level-number">Level 1</h1>
+            </div> -->
         </div>
+
+      
+        
         <footer>Made by Michelle</footer>
 
         <script src="script.js"></script>
