@@ -74,16 +74,19 @@ img.moving {
 
 #game-over {
     display: flex;
-    padding: 20vh;
     justify-content: center;
     flex-direction: column;
     align-content: center;
     align-items: center;
     display: none;
+    height: 80vh;
+    color: #58250c;
 }
 
 div#next-level {
-    z-index: -100;
+    display: none;
+    height: 80vh;
+    color: #144004;
     animation: fadeOut 2s ease forwards;
 }
 

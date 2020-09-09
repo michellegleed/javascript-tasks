@@ -34,7 +34,7 @@ let dinoImgs = [];
 let dinoIndexes = [];
 let lastIndex;
 let score = 0;
-let asteroidsLeft = dinoGridCols * dinoGridRows;
+let asteroidsLeft = 25;
 let currentLevel = 1;
 
 createAsteroid = () => {
@@ -55,21 +55,38 @@ createAsteroid();
 createGameOver = () => {
     // var wrapperDiv = document.createElement("DIV");
     // wrapperDiv.id = "game-over";
+
+    // var h1 = document.createElement("H1");
+    // var h1Node = document.createTextNode("Game Over");
+    // h1.appendChild(h1Node);
+    // wrapperDiv.appendChild(h1);
+    
     // var p1 = document.createElement("P");
     // var p1Node = document.createTextNode(`Kills: ${score}`);
     // p1.appendChild(p1Node);
-    // console.log("appending gameover to wrapper div");
+    // p1.id = "final-score";
     // wrapperDiv.appendChild(p1);
+    
+    // var p2 = document.createElement("P");
+    // var p2Node = document.createTextNode(`Accuracy: ${Math.round(score / 25 * 100)}%`);
+    // p2.appendChild(p2Node);
+    // p2.id = "final-accuracy";
+    // wrapperDiv.appendChild(p2);
+
+    // console.log("appending gameover to wrapper div");
+    // wrapper.appendChild(wrapperDiv);
 
 //     <div id="game-over">
 //     <h1>Game Over</h1>
 //     <p id="final-score">Kills: </p>
 //     <p id="final-percent">%</p>
 // </div>
-    finalScoreNode.innerHTML = `Kills: ${score}`;
-    finalPercentNode.innerHTML = `Percent: ${Math.round((score / (dinoGridCols * dinoGridRows)) * 100)}%`;
-    gameOverDiv.style.display = "flex";
 
+    stop();
+    finalScoreNode.innerHTML = `Kills: ${score}`;
+    finalPercentNode.innerHTML = `Accuracy: ${Math.round(score / 25 * 100)}%`;
+    wrapper.style.display = "none";
+    gameOverDiv.style.display = "flex";
 }
 
 showDino = () => {
@@ -140,9 +157,13 @@ for (let i=0; i<dinoImgs.length; i++) {
 }
 
 start = () => {
+    wrapper.style.display = "unset";
+    hideMessages();
     button.value = "stop";
     button.innerHTML = "Stop";
     asteroidsLeftNode.innerHTML = `Asteroids Left: ${asteroidsLeft}`;
+    score = 0;
+    asteroidsLeft = 25;
     // switch (currentLevel) {
     //     case 1: 
     //     interval = setInterval(showDino, 2000);
@@ -189,6 +210,11 @@ throwAsteroid = (e) => {
         asteroidImg.style.top = `${e.clientY - 30}px`;
         asteroidImg.style.left = `${e.clientX - 15}px`;
     }
+}
+
+hideMessages = () => {
+    gameOverDiv.style.display = "none";
+    nextLevelDiv.style.display = "none";
 }
 
 window.addEventListener("click", function (e) {
