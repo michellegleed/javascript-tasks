@@ -10,6 +10,7 @@ body {
     background-size: cover;
     background-position: center; 
     font-family: 'Frijole', cursive;
+    height: 100vh;
 }
 
 header {
@@ -86,18 +87,20 @@ img.moving {
     flex-direction: column;
     align-content: center;
     align-items: center;
-    display: none;
-    height: 80vh;
     color: #58250c;
+    display: none;
+    
 }
 
 div#next-level {
-    color: #0d2902;
-    align-content: center;
+    display: flex;
+    color: #193f09;
+    align-items: center;
     justify-content: center;
+    display: none;
 }
 
-@keyframes fadeOut {
-    0% {opacity: 100; transform: scale(1.2)}
-    100% {opacity: 0; transform: scale(2)}
+div#next-level h1 {
+    font-size: 120px;
 }
+

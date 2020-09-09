@@ -7,20 +7,21 @@ const wrapper = document.querySelector('#wrapper');
 const button = document.querySelector('#button');
 const body = document.querySelector('body');
 const header = document.querySelector('header');
+const footer = document.querySelector('footer');
 
 const finalScoreNode = document.querySelector('#final-score');
 const finalPercentNode = document.querySelector('#final-percent');
 const finalLevel = document.querySelector('#final-level');
 
-let gridHeight = window.innerHeight - header.offsetHeight;
+let gridHeight = window.innerHeight - header.offsetHeight - footer.offsetHeight - 48.0;
 let gridWidth = window.innerWidth - 48.0;
 
-console.log("screen width: ", gridWidth);
-console.log("screen height: ", gridHeight);
+console.log("grid width: ", gridWidth);
+console.log("grid height: ", gridHeight);
 
-gameOverDiv.style.height = gridHeight;
+gameOverDiv.style.height = `${gridHeight}px`;
 gameOverDiv.style.width = gridWidth;
-nextLevelDiv.style.height = gridHeight;
+nextLevelDiv.style.height = `${gridHeight}px`;
 nextLevelDiv.style.width = gridWidth;
 
 
@@ -30,8 +31,8 @@ nextLevelDiv.style.width = gridWidth;
 // - make commet fly in on click (but only explode if on a dino)
 
 
-let dinoGridRows = Math.floor(gridHeight / 75.0)
-let dinoGridCols = Math.floor(gridWidth / 75.0)
+let dinoGridRows = Math.floor(gridHeight / 75.0);
+let dinoGridCols = Math.floor(gridWidth / 75.0);
 
 console.log("dino grid rows = ", dinoGridRows);
 console.log("dino grid cols = ", dinoGridCols);
@@ -44,19 +45,32 @@ let asteroidsLeft = 15;
 let currentLevel = 1;
 
 createAsteroid = () => {
-    asteroidLeftOffset = wrapper.width + 100;
+    // asteroidLeftOffset = wrapper.width + 100;
     let asteroid = document.createElement("img");
     asteroid.id = "asteroid-img";
     asteroid.src = "img/comet.png";
     asteroid.height = 75;
     asteroid.width = 75;
-    asteroid.style.position = "absolute";
-    asteroid.style.top = "-100px";
-    asteroid.style.left = asteroidLeftOffset + "px";
+    // asteroid.style.position = "absolute";
+    // asteroid.style.top = "-100px";
+    // asteroid.style.left = asteroidLeftOffset + "px";
     body.appendChild(asteroid);
 }
 
 createAsteroid();
+
+asteroidNode = document.querySelector('#asteroid-img');
+
+resetAsteroidPosition = () => {
+    asteroidLeftOffset = wrapper.width + 100;
+    asteroidNode.style.position = "absolute";
+    asteroidNode.style.top = "-100px";
+    asteroidNode.style.left = asteroidLeftOffset + "px";
+}
+
+resetAsteroidPosition();
+
+
 
 gameOver = () => {
     // var wrapperDiv = document.createElement("DIV");
@@ -99,6 +113,7 @@ gameOver = () => {
 }
 
 showDino = () => {
+    resetAsteroidPosition();
     if (lastIndex != null) {
         dinoImgs[lastIndex].classList.remove("active");
     }
@@ -109,14 +124,13 @@ showDino = () => {
 
 whack = (index) => {
     if (index == lastIndex) {
-        console.log(typeof(index));
         i = dinoIndexes.indexOf(lastIndex);
         dinoIndexes.splice(i, 1);
-        console.log("dino hit at index ", index);
-        console.log("i is ", i);
+        // console.log("dino hit at index ", index);
+        // console.log("i is ", i);
         dinoImgs[index].src = "img/explosion.png";
         updateScore();
-        console.log(dinoIndexes);
+        // console.log(dinoIndexes);
     }
 }
 
@@ -180,7 +194,6 @@ start = () => {
         case 5: 
         break;
     }
-    // interval = setInterval(showDino, 1200);
 }
 
 stop = () => {
@@ -190,7 +203,7 @@ stop = () => {
 }
 
 toggleButton = () => {
-    console.log("button toggled");
+    // console.log("button toggled");
     if (button.value == "start") {
         start();
     } else {
@@ -206,7 +219,7 @@ checkAccuracy = () => {
         // nextLevelDiv.style.height = wrapper.style.height;
         nextLevelDiv.style.display = "flex";
         levelH1.innerHTML = `Level ${currentLevel}`;
-        setTimeout(start, 3000);
+        setTimeout(start, 2200);
     } 
     else {
         gameOver();
@@ -219,8 +232,8 @@ throwAsteroid = (e) => {
         updateAsteroidsLeft();
         asteroidImg = document.querySelector("#asteroid-img");
         asteroidImg.classList.add("moving");
-        console.log("x = ", e.clientX);
-        console.log("y = ", e.clientY);
+        // console.log("x = ", e.clientX);
+        // console.log("y = ", e.clientY);
         
         asteroidImg.style.top = `${e.clientY - 30}px`;
         asteroidImg.style.left = `${e.clientX - 15}px`;
@@ -236,8 +249,6 @@ hideMessages = () => {
     gameOverDiv.style.display = "none";
     nextLevelDiv.style.display = "none";
 }
-
-
 
 window.addEventListener("click", function (e) {
     if (button.value == "stop" && asteroidsLeft > 0) {
