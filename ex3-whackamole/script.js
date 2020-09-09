@@ -159,7 +159,7 @@ start = () => {
     //     case 5: 
     //     break;
     // }
-    interval = setInterval(showDino, 1600);
+    interval = setInterval(showDino, 1200);
 }
 
 stop = () => {
