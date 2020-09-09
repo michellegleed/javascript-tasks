@@ -10,12 +10,18 @@ const header = document.querySelector('header');
 
 const finalScoreNode = document.querySelector('#final-score');
 const finalPercentNode = document.querySelector('#final-percent');
+const finalLevel = document.querySelector('#final-level');
 
 let gridHeight = window.innerHeight - header.offsetHeight;
 let gridWidth = window.innerWidth - 48.0;
 
 console.log("screen width: ", gridWidth);
 console.log("screen height: ", gridHeight);
+
+gameOverDiv.style.height = gridHeight;
+gameOverDiv.style.width = gridWidth;
+nextLevelDiv.style.height = gridHeight;
+nextLevelDiv.style.width = gridWidth;
 
 
 // STILL TO DO..
@@ -34,7 +40,7 @@ let dinoImgs = [];
 let dinoIndexes = [];
 let lastIndex;
 let score = 0;
-let asteroidsLeft = 25;
+let asteroidsLeft = 15;
 let currentLevel = 1;
 
 createAsteroid = () => {
@@ -52,7 +58,7 @@ createAsteroid = () => {
 
 createAsteroid();
 
-createGameOver = () => {
+gameOver = () => {
     // var wrapperDiv = document.createElement("DIV");
     // wrapperDiv.id = "game-over";
 
@@ -83,10 +89,13 @@ createGameOver = () => {
 // </div>
 
     stop();
+    // gameOverDiv.style.height = wrapper.style.height;
     finalScoreNode.innerHTML = `Kills: ${score}`;
-    finalPercentNode.innerHTML = `Accuracy: ${Math.round(score / 25 * 100)}%`;
+    finalPercentNode.innerHTML = `Accuracy: ${Math.round(score / (15 * currentLevel) * 100)}%`;
+    finalLevel.innerHTML = `Level ${currentLevel}`;
     wrapper.style.display = "none";
     gameOverDiv.style.display = "flex";
+    score = 0;
 }
 
 showDino = () => {
@@ -114,15 +123,6 @@ whack = (index) => {
 updateScore = () => {
     score++;
     scoreNode.innerHTML = `Kills: ${score}`;
-    // if (score % 10 == 0) {
-    //     console.log("score reached 10 - next level");
-    //     window.clearInterval(interval);
-    //     currentLevel++;
-    //     levelH1.innerHTML = `Level ${currentLevel}`;
-    //     asteroidsLeft = 20;
-    //     start();
-    //     levelH1.style.display = "none";
-    // }
 }
 
 updateAsteroidsLeft = () => {
@@ -162,25 +162,25 @@ start = () => {
     button.value = "stop";
     button.innerHTML = "Stop";
     asteroidsLeftNode.innerHTML = `Asteroids Left: ${asteroidsLeft}`;
-    score = 0;
-    asteroidsLeft = 25;
-    // switch (currentLevel) {
-    //     case 1: 
-    //     interval = setInterval(showDino, 2000);
-    //     break;
-    //     case 2: 
-    //     interval = setInterval(showDino, 1500);
-    //     break;
-    //     case 3: 
-    //     interval = setInterval(showDino, 1000);
-    //     break;
-    //     case 4: 
-    //     interval = setInterval(showDino, 1000);
-    //     break;
-    //     case 5: 
-    //     break;
-    // }
-    interval = setInterval(showDino, 1200);
+    asteroidsLeft = 15;
+    console.log("current level =", currentLevel);
+    switch (currentLevel) {
+        case 1: 
+        interval = setInterval(showDino, 1500);
+        break;
+        case 2: 
+        interval = setInterval(showDino, 1200);
+        break;
+        case 3: 
+        interval = setInterval(showDino, 1000);
+        break;
+        case 4: 
+        interval = setInterval(showDino, 800);
+        break;
+        case 5: 
+        break;
+    }
+    // interval = setInterval(showDino, 1200);
 }
 
 stop = () => {
@@ -198,6 +198,21 @@ toggleButton = () => {
     }
 }
 
+checkAccuracy = () => {
+    if (Math.round(score / (15 * currentLevel) * 100) > 75) {
+        console.log("accuracy > 75% proceed to next level");
+        currentLevel++;
+        wrapper.style.display = "none";
+        // nextLevelDiv.style.height = wrapper.style.height;
+        nextLevelDiv.style.display = "flex";
+        levelH1.innerHTML = `Level ${currentLevel}`;
+        setTimeout(start, 3000);
+    } 
+    else {
+        gameOver();
+    }
+}
+
 throwAsteroid = (e) => {
     if (e.clientY > header.offsetHeight) {
         asteroidsLeft--;
@@ -210,6 +225,11 @@ throwAsteroid = (e) => {
         asteroidImg.style.top = `${e.clientY - 30}px`;
         asteroidImg.style.left = `${e.clientX - 15}px`;
     }
+    if (asteroidsLeft == 0) {
+        console.log("no asteroids left! checking accuracy");
+        stop();
+        checkAccuracy();
+    }
 }
 
 hideMessages = () => {
@@ -217,10 +237,14 @@ hideMessages = () => {
     nextLevelDiv.style.display = "none";
 }
 
+
+
 window.addEventListener("click", function (e) {
     if (button.value == "stop" && asteroidsLeft > 0) {
         throwAsteroid(e);
-    } else if (button.value == "stop") {
-        createGameOver();
     }
+    // } else if (button.value == "stop") {
+       
+    //     // GameOver();
+    // }
 });

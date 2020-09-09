@@ -57,16 +57,24 @@ img.active {
     opacity: 100;
 }
 
-img.exploded {
-    animation-name: "fadeExplosion";
-    animation-duration: 2s;
+/* @keyframes fadeExplosion {
+    0% {
+        opacity: 100; 
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 75; 
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
-@keyframes fadeExplosion {
-    20% {opacity: 100; transform: scale(1.2)}
-    50% {opacity: 75; transform: scale(1.5)}
-    100% {opacity: 0;}
-}
+
+img#asteroid-img {
+    animation: fade 2s ease;
+} */
 
 img.moving {
     transition: position 2s;   
@@ -84,10 +92,9 @@ img.moving {
 }
 
 div#next-level {
-    display: none;
-    height: 80vh;
-    color: #144004;
-    animation: fadeOut 2s ease forwards;
+    color: #0d2902;
+    align-content: center;
+    justify-content: center;
 }
 
 @keyframes fadeOut {
